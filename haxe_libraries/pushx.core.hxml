@@ -1,0 +1,5 @@
+# @install: lix --silent download https://github.com/kevinresol/pushx.core/archive/96525e95a82df0dd45d215e021105dd930b15777.tar.gz into pushx.core/0.0.0/github/96525e95a82df0dd45d215e021105dd930b15777
+-D pushx.core=0.0.0
+-cp ${HAXESHIM_LIBCACHE}/pushx.core/0.0.0/github/96525e95a82df0dd45d215e021105dd930b15777/src
+
+-lib tink_core
