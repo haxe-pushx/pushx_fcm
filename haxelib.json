@@ -12,6 +12,6 @@
   "releasenote": "initial release",
   "version": "0.0.0",
   "dependencies": {
-    "pushx.gcm": ""
+    "pushx_gcm": ""
   }
 }
