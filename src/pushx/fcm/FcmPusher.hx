@@ -9,7 +9,7 @@ import tink.url.Host;
 
 using tink.CoreApi;
 
-class FcmPusher<T> implements pushx.Pusher<T> {
+class FcmPusher<T> extends pushx.BasePusher<T> {
 	var projectId:String;
 	var toMessage:T->InputMessage;
 	var remote:Remote<Api>;
@@ -23,23 +23,20 @@ class FcmPusher<T> implements pushx.Pusher<T> {
 		);
 	}
 	
-	public function single(id:String, data:T):Surprise<Noise, TypedError<ErrorType>> {
+	override function single(id:String, data:T):Surprise<Noise, TypedError<ErrorType>> {
 		var message:RealInputMessage = cast toMessage(data);
 		message.token = id;
 		return send(message);
 	}
 	
-	public function multiple(ids:Array<String>, data:T):Future<Array<Outcome<Noise, TypedError<ErrorType>>>> {
-		return Future.ofMany([for(id in ids) single(id, data)]);
-	}
-	
-	public function topic(topic:String, data:T):Surprise<Noise, TypedError<ErrorType>> {
+	override function topic(topic:String, data:T):Surprise<Noise, TypedError<ErrorType>> {
 		var message:RealInputMessage = cast toMessage(data);
 		message.topic = topic;
 		return send(message);
 	}
 	
 	function send(message:RealInputMessage) {
+		trace(message);
 		return remote.send(projectId, {message: message})
 			.map(function(o) return switch o {
 				case Success({error_code: null}): Success(Noise);
@@ -107,12 +104,12 @@ typedef Notification = {
 }
 
 typedef AndroidConfig = {
-	collapse_key:String,
-	priority:AndroidMessagePriority,
-	ttl:String,
-	restricted_package_name:String,
-	data:DynamicAccess<String>,
-	notification:AndroidNotification,
+	?collapse_key:String,
+	?priority:AndroidMessagePriority,
+	?ttl:String,
+	?restricted_package_name:String,
+	?data:DynamicAccess<String>,
+	?notification:AndroidNotification,
 }
 
 @:enum abstract AndroidMessagePriority(String) to String {
@@ -121,24 +118,24 @@ typedef AndroidConfig = {
 }
 
 typedef AndroidNotification = {
-	title:String,
-	body:String,
-	icon:String,
-	color:String,
-	sound:String,
-	tag:String,
-	click_action:String,
-	body_loc_key:String,
-	body_loc_args:Array<String>,
-	title_loc_key:String,
-	title_loc_args:Array<String>,
+	?title:String,
+	?body:String,
+	?icon:String,
+	?color:String,
+	?sound:String,
+	?tag:String,
+	?click_action:String,
+	?body_loc_key:String,
+	?body_loc_args:Array<String>,
+	?title_loc_key:String,
+	?title_loc_args:Array<String>,
 }
 
 typedef WebpushConfig = {
-	headers:DynamicAccess<String>,
-	data:DynamicAccess<String>,
-	notification:{},
-	fcm_options:WebpushFcmOptions,
+	?headers:DynamicAccess<String>,
+	?data:DynamicAccess<String>,
+	?notification:Dynamic, // TODO
+	?fcm_options:WebpushFcmOptions,
 }
 
 typedef WebpushFcmOptions = {
@@ -146,6 +143,6 @@ typedef WebpushFcmOptions = {
 }
 
 typedef ApnsConfig = {
-	headers:DynamicAccess<String>,
-	payload:{},
+	?headers:DynamicAccess<String>,
+	?payload:DynamicAccess<Dynamic>, // TODO
 }

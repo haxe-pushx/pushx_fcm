@@ -12,7 +12,7 @@
   "releasenote": "initial release",
   "version": "0.0.0",
   "dependencies": {
-    "pushx_gcm": "",
+    "pushx_core": "",
     "grest_core": "",
     "tink_web": ""
   }
