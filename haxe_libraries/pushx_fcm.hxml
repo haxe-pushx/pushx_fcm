@@ -1,3 +1,5 @@
 -D pushx_fcm
 -cp src
--lib pushx_gcm
+-lib pushx_core
+-lib tink_web
+-lib grest_core

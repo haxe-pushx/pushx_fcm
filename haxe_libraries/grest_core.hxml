@@ -1,0 +1,6 @@
+-D grest_core=0.0.0
+# @install: lix --silent download "gh://github.com/haxegrest/grest_core#2cd525c802fa504b5be774e0e5cd02ed0bf6cb08" into grest_core/0.0.0/github/2cd525c802fa504b5be774e0e5cd02ed0bf6cb08
+-lib tink_web
+-lib tink_http_fetch
+-lib jsonwebtoken
+-cp ${HAXE_LIBCACHE}/grest_core/0.0.0/github/2cd525c802fa504b5be774e0e5cd02ed0bf6cb08/src

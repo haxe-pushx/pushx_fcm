@@ -1,6 +1,0 @@
-# @install: lix --silent download "https://github.com/kevinresol/pushx_gcm/archive/3aecf6fe409b02904d63c158feef4b93716c2547.tar.gz" into pushx_gcm/0.0.0/github/3aecf6fe409b02904d63c158feef4b93716c2547
--D pushx_gcm=0.0.0
--cp ${HAXESHIM_LIBCACHE}/pushx_gcm/0.0.0/github/3aecf6fe409b02904d63c158feef4b93716c2547/src
-
--lib pushx_core
--lib tink_http_fetch

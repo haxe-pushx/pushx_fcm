@@ -3,4 +3,4 @@ tests.hxml
 
 -lib travix
 -lib hxnodejs
--lib pushx.fcm
+-lib pushx_fcm
