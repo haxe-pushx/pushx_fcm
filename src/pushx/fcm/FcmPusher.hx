@@ -36,7 +36,6 @@ class FcmPusher<T> extends pushx.BasePusher<T> {
 	}
 	
 	function send(message:RealInputMessage) {
-		trace(message);
 		return remote.send(projectId, {message: message})
 			.map(function(o) return switch o {
 				case Success({error_code: null}): Success(Noise);
